@@ -24,3 +24,9 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.active {
+  color: yellow;
+  font-weight: bold;
+  text-decoration: underline;
+}
