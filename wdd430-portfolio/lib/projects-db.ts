@@ -24,13 +24,13 @@ export const projects: Project[] = [
     type: 'school',
     technologies: ['PostgreSQL', 'SQL']
     },
-    {
-        id: 3,
-        title: 'Portfolio Website',
-        description: 'A personal portfolio website built with Next.js.',
-        type: 'school',
-        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-    }
+  {
+    id: 3,
+    title: 'Portfolio Website',
+    description: 'A personal portfolio website built with Next.js.',
+    type: 'school',
+    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+  }
 
 ];
 
