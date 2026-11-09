@@ -2,27 +2,17 @@ import {NextResponse } from 'next/server';
 import { getProjectById } from '@/lib/projects-db';
 
 export async function GET(
-    request: Request,
-    {params} : {params: Promise<{id: string}>}
+    _request: Request,
+    {params} : {params: {id: string}}
 ) {
-    const {id} = await params;
-    const projectId = Number(id);
-
-    if (!Number.isInteger(projectId) || projectId <= 0) {
-        return NextResponse.json(
-            { error: 'Invalid project ID' },
-            { status: 400 }
-        )
+    const id =  Number(params.id);
+    if (Number.isNaN(id)) {
+        return NextResponse.json({ error: 'Invalid id' }, {status: 400})
     }
 
-    const project = getProjectById(projectId);
-
+    const project = await getProjectById(id)
     if (!project) {
-        return NextResponse.json(
-            { error: 'Project not found' },
-            { status: 404 }
-        )
+        return NextResponse.json({ error: 'Not Found'}, {status: 404})
     }
-
     return NextResponse.json(project);
 }

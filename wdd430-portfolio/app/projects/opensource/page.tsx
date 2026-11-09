@@ -1,7 +1,7 @@
 import { getProjects } from '@/lib/projects-db';
 
-export default function OpenSourceProjects() {
-    const openSourceProjects = getProjects('opensource');
+export default async function OpenSourceProjects() {
+    const openSourceProjects = await getProjects('opensource');
     return (
         <main>
             <h2 className='text-xl font-bold mb-4'>Open Source Projects</h2>

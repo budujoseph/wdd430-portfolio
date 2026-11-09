@@ -1,7 +1,7 @@
 import { getProjects } from '@/lib/projects-db'; 
 
-export default function Projects() {
-    const projects = getProjects();
+export default async function Projects() {
+    const projects = await getProjects();
 
     return (
         <main>

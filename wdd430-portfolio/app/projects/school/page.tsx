@@ -1,8 +1,8 @@
 
 import { getProjects } from '@/lib/projects-db';
 
-export default function SchoolProjects() {
-    const schoolProjects = getProjects('school');
+export default async function SchoolProjects() {
+    const schoolProjects = await getProjects('school');
     return (
         <main>
             <h2 className='text-xl font-bold mb-4'>School Projects</h2>
