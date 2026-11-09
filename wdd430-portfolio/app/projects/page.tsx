@@ -1,6 +1,9 @@
+import { connection } from 'next/server'
 import { getProjects } from '@/lib/projects-db'; 
 
 export default async function Projects() {
+
+    await connection();
     const projects = await getProjects();
 
     return (
