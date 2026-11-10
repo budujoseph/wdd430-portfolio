@@ -1,4 +1,4 @@
-import {sql} from '@vercel/postgres'
+import { sql } from '@vercel/postgres'
 
 export interface Project {
   id: number;
@@ -9,8 +9,44 @@ export interface Project {
   link?: string;
 }
 
+const ITEMS_PER_PAGE = 6
 
-export async function getProjects(type?: string | null): Promise<Project[]> {
+export async function fetchFilteredProjects(query: string, currentPage: number) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  const { rows } = await sql<Project>`
+    SELECT * FROM projects 
+    WHERE 
+      title ILIKE ${`%${query}%`} OR
+      description ILIKE ${`%${query}%`} OR
+      type ILIKE ${`%${query}%`}
+    ORDER BY id
+    LIMIT ${ITEMS_PER_PAGE}
+    OFFSET ${offset}
+    `;
+  return rows;
+}
+
+export async function fetchProjectsPages(
+  query: string
+): Promise<number> {
+  const { rows } = await sql<{ count: string }>`
+    SELECT COUNT(*)
+    FROM projects
+    WHERE
+      title ILIKE ${`%${query}%`} OR
+      description ILIKE ${`%${query}%`} OR
+      type ILIKE ${`%${query}%`}
+  `;
+
+  const totalPages = Math.ceil(
+    Number(rows[0].count) / ITEMS_PER_PAGE
+  );
+
+  return totalPages;
+}
+
+export async function getProjects(type?: string | null, currentPage?: number): Promise<Project[]> {
   if (type) {
     const { rows } = await sql<Project>
       `SELECT * FROM projects WHERE type = ${type} ORDER BY id`;

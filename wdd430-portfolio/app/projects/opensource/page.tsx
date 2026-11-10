@@ -2,6 +2,7 @@ import { getProjects } from '@/lib/projects-db';
 
 export default async function OpenSourceProjects() {
     const openSourceProjects = await getProjects('opensource');
+    // await new Promise(res => setTimeout(res, 2000));
     return (
         <main>
             <h2 className='text-xl font-bold mb-4'>Open Source Projects</h2>
