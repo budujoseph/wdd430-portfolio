@@ -20,7 +20,10 @@ export default function NavLinks() {
                     </Link></li>
                     <li><Link href="/contact" className={pathname === '/contact' ? 'active' : 'hover:text-black'}>
                         Contact
-                    </Link></li>
+                </Link></li>
+                <li><Link href='/projects/create' className={pathname === '/projects/create'? 'active' : 'hover:text-black'}>
+                    Create Project
+                </Link></li>
                 </ul>
             </nav>
     )

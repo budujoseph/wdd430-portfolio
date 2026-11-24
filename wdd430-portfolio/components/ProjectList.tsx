@@ -1,5 +1,6 @@
 import ProjectCard from './ProjectCard';
 
+
 interface Project {
     title: string;
     description: string;
